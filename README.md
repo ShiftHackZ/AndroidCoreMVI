@@ -1,6 +1,8 @@
 # Android Core MVI 
 
-<p align="center">
+Android Core MVI library is the implementation of Model-View-Intent architecture pattern with Jetpack Compose.
+
+<p>
   <a href="https://jitpack.io/#ShiftHackZ/AndroidCoreMVI">
     <img src="https://jitpack.io/v/ShiftHackZ/AndroidCoreMVI.svg" />
   </a>
