@@ -22,7 +22,7 @@ Then add all or only needed library module dependencies to your module level bui
 
 ```
 dependencies {
-    implementation 'com.github.ShiftHackZ.AndroidCoreMVI:mvi:<VERSION>'
+    implementation 'com.github.ShiftHackZ:AndroidCoreMVI:<VERSION>'
 }
 ```
 
