@@ -46,7 +46,7 @@ abstract class MviViewModel<S : MviState, I : MviIntent, E : MviEffect> : ViewMo
     /**
      * Defines [CoroutineDispatcher] that will be used for effect emitter coroutine context.
      */
-    protected val effectDispatcher: CoroutineDispatcher = Dispatchers.Main.immediate
+    protected open val effectDispatcher: CoroutineDispatcher = Dispatchers.Main.immediate
 
     /**
      * The initial instance of state that is used at [MviViewModel] initialization.
