@@ -1,5 +1,7 @@
 package com.shifthackz.android.core.mvi.app.ui.screen
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,9 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalClipboardManager
-import androidx.compose.ui.platform.LocalHapticFeedback
-import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -25,14 +25,15 @@ import com.shifthackz.android.core.mvi.MviComponent
 fun DemoScreen(
     modifier: Modifier = Modifier,
 ) {
-    val clipboardManager = LocalClipboardManager.current
+    val context = LocalContext.current
     MviComponent(
         viewModel = viewModel<DemoViewModel>(),
         processEffect = { effect ->
+            Log.d("UI", "Effect: $effect")
             when (effect) {
-                is DemoEffect.CopyToClipboard -> clipboardManager.setText(
-                    AnnotatedString("${effect.number}")
-                )
+                is DemoEffect.ShowToast -> Toast
+                    .makeText(context, "Number is ${effect.number}", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     ) { state, processIntent ->
