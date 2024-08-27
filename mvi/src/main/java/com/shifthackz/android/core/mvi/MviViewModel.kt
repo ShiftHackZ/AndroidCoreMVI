@@ -4,6 +4,7 @@ package com.shifthackz.android.core.mvi
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -41,6 +42,11 @@ abstract class MviViewModel<S : MviState, I : MviIntent, E : MviEffect> : ViewMo
      */
     protected val currentState: S
         get() = state.value
+
+    /**
+     * Defines [CoroutineDispatcher] that will be used for effect emitter coroutine context.
+     */
+    protected val effectDispatcher: CoroutineDispatcher = Dispatchers.Main.immediate
 
     /**
      * The initial instance of state that is used at [MviViewModel] initialization.
@@ -84,7 +90,7 @@ abstract class MviViewModel<S : MviState, I : MviIntent, E : MviEffect> : ViewMo
      * @param effect a new instance of [E] to emit.
      */
     protected fun emitEffect(effect: E) {
-        viewModelScope.launch(Dispatchers.Main.immediate) {
+        viewModelScope.launch(effectDispatcher) {
             _effect.send(effect)
         }
     }

@@ -8,10 +8,11 @@ class DemoViewModel : MviViewModel<DemoState, DemoIntent, DemoEffect>() {
 
     override fun processIntent(intent: DemoIntent) {
         when (intent) {
-            DemoIntent.IncrementNumber -> updateState {
-                val incremented = it.number + 1
+            DemoIntent.IncrementNumber -> updateState { state ->
+                val incremented = state.number + 1
                 emitEffect(DemoEffect.CopyToClipboard(incremented))
-                it.copy(number = incremented)
+                emitEffect(DemoEffect.ShowToast(incremented))
+                state.copy(number = incremented)
             }
         }
     }
